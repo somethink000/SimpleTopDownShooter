@@ -6,15 +6,18 @@ using UnityEngine;
 
 public class Chunk : MonoBehaviour
 {
-    public const int ChunkWidth = 10;
+    public const int ChunkWidth = 12;
 
     public World parent;
     public ChunkData ChunkData;
 
     private List<Vector3> verticles = new List<Vector3>();
     private List<int> triangles = new List<int>();
+
+    
     void Start()
     {
+        
         Mesh chunkMesh = new Mesh();
 
 
@@ -45,10 +48,7 @@ public class Chunk : MonoBehaviour
 
 
 
-    void Update()
-    {
-
-    }
+  
     private void GeneratePlane(int x, int y, int z)
     {
         if (ChunkData.planes[x, y, z] == 0)

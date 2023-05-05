@@ -8,20 +8,21 @@ public class Player : MonoBehaviour
 {
     //mowement
     public float speed = 6.0f;
-   
+    private bool watch;
+
     //stats
     public int Health = 100;
     public int Armor;
     public int Hunger = 100;
     public int Water = 100;
-    
+
 
 
 
     //general
     public LayerMask groundMask;
     public GunController activeGun;
-    private CharacterController controller;  
+    private CharacterController controller;
     private Camera _cam;
     public Transform baseTransform;
     // Start is called before the first frame update
@@ -29,7 +30,7 @@ public class Player : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         _cam = Camera.main;
-        
+
     }
 
     // Update is called once per frame
@@ -38,29 +39,44 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+            watch = true;
 
 
-            if (Physics.Raycast(ray, out RaycastHit lockPoint, 1000f, groundMask))
-            {
-                controller.gameObject.transform.LookAt(new Vector3(lockPoint.point.x, transform.position.y, lockPoint.point.z));
-            }
-
-            activeGun.isFiering = true;
-
-
+            if (activeGun)
+                activeGun.isFiering = true;
 
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            activeGun.isFiering = false;
+            watch = false;
+
+
+            if (activeGun)
+                activeGun.isFiering = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && activeGun)
         {
             activeGun.Reload();
         }
+
+        if (watch)
+        {
+            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+
+
+            if (Physics.Raycast(ray, out RaycastHit lockPoint, 1000f, groundMask))
+            {
+
+                controller.gameObject.transform.LookAt(new Vector3(lockPoint.point.x, transform.position.y, lockPoint.point.z));
+            }
+        }
+
+
+
+
+
 
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -68,7 +84,7 @@ public class Player : MonoBehaviour
         Vector3 moveDirection = baseTransform.right * horizontal + baseTransform.forward * vertical;
 
         controller.Move(moveDirection * speed * Time.deltaTime);
-      
+
     }
 
     public void TakeDamage(int damage)

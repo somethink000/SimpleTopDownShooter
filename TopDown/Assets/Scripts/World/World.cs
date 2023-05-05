@@ -9,27 +9,51 @@ public class World : MonoBehaviour
 
     public Dictionary<Vector2Int, ChunkData> ChunkDatas = new Dictionary<Vector2Int, ChunkData>();
     public Chunk chuncpref;
-    public int chunkCount = 10;
+    private const int chunkCount = 4;
 
     public GameObject pine;
 
+    private Camera mainCamera;
+    private Vector2Int currentPlayerChunk;
 
+    private mapObj[] allMapObjects;
 
-    private void Start()
+    void Start()
     {
-        
+      allMapObjects = Resources.LoadAll<mapObj>("");
+        Debug.Log(allMapObjects);
+        mainCamera = Camera.main;
 
-        for (int x = 0; x < chunkCount; x++)
+        Generate();
+
+       
+    }
+    void Update()
+    {
+        Vector3Int playerWorldPos = Vector3Int.FloorToInt(mainCamera.transform.position);
+        Vector2Int playerChunk = GetChunkContainsObject(playerWorldPos);
+        if (playerChunk != currentPlayerChunk)
         {
-            for (int y = 0; y < chunkCount; y++)
-            {
-                var chunkData = new ChunkData();
+            currentPlayerChunk = playerChunk;
+            Generate();
+        }
+    }
 
+    private void Generate()
+    {
+        for (int x = currentPlayerChunk.x - chunkCount; x < currentPlayerChunk.x + chunkCount; x++)
+        {
+            for (int y = currentPlayerChunk.y - chunkCount; y < currentPlayerChunk.y + chunkCount; y++)
+            {
+                
+                if (ChunkDatas.ContainsKey(new Vector2Int(x, y))) continue;
+                var chunkData = new ChunkData();
+                
                 int xPos = x * Chunk.ChunkWidth;
                 int zPos = y * Chunk.ChunkWidth;
 
                 chunkData.ChunkPosition = new Vector2Int(x, y);
-                chunkData.planes = TerrainGenerator.GenerateTerrain(xPos,zPos);
+                chunkData.planes = TerrainGenerator.GenerateTerrain(xPos, zPos);
                 ChunkDatas.Add(new Vector2Int(x, y), chunkData);
 
 
@@ -38,19 +62,31 @@ public class World : MonoBehaviour
                 chunk.parent = this;
 
 
-                GenerateObjects(pine, new Vector3(xPos,0,zPos));
+                foreach (var mapObj in allMapObjects)
+                {
+
+ GenerateObjects(mapObj.chance, mapObj.ptrfab, new Vector3(Random.Range(xPos, xPos + Chunk.ChunkWidth), 0, Random.Range(zPos, zPos + Chunk.ChunkWidth)));
+
+                }
             }
         }
-
-       
     }
 
-
-    public void GenerateObjects(GameObject obj, Vector3 objpos)
+    public void GenerateObjects(int chance, GameObject mapobj, Vector3 objpos)
     {
 
-        Instantiate(obj, objpos, Quaternion.identity);
+        int objCount = Random.Range(0, chance);
+
+        for (int i = 0; i < objCount; i++)
+        {
+            Instantiate(mapobj, objpos, Quaternion.identity);
+        }
 
     }
 
+
+    public Vector2Int GetChunkContainsObject(Vector3Int objWorldPos)
+    {
+        return new Vector2Int(objWorldPos.x / Chunk.ChunkWidth, objWorldPos.z / Chunk.ChunkWidth);
+    }
 }
