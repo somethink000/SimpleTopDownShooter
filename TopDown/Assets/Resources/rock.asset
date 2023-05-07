@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: rk
   _prefab: {fileID: 8788318668123038826, guid: 91e8d298025b09346ad075da970143fa, type: 3}
-  _chance: 2
+  _chance: 5

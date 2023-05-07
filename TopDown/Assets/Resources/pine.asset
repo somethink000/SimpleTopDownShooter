@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: pin
   _prefab: {fileID: 8621441290667425884, guid: ee79a2ca8cac7df4583a911302bfe08f, type: 3}
-  _chance: 2
+  _chance: 75

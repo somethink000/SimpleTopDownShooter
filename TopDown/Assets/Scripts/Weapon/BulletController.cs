@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
+   
+
 
     private Rigidbody bulletRigidbody;
     public float speed = 50f;
@@ -22,6 +24,10 @@ public class BulletController : MonoBehaviour
 
     private void Update()
     {
+      
+
+
+
         lifeTyme -= Time.deltaTime;
         if (lifeTyme <= 0)
         {
@@ -35,7 +41,7 @@ public class BulletController : MonoBehaviour
         
         if (other.gameObject.GetComponent<Enemy>())
         {
-            other.gameObject.GetComponent<Enemy>().TakeDamage(10);
+            other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
         }
         Destroy(gameObject);
     }

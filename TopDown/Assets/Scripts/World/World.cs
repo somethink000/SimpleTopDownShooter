@@ -17,11 +17,12 @@ public class World : MonoBehaviour
     private Vector2Int currentPlayerChunk;
 
     private mapObj[] allMapObjects;
-
+    
     void Start()
     {
       allMapObjects = Resources.LoadAll<mapObj>("");
-        Debug.Log(allMapObjects);
+       
+       
         mainCamera = Camera.main;
 
         Generate();
@@ -38,7 +39,10 @@ public class World : MonoBehaviour
             Generate();
         }
     }
+    
+    
 
+    
     private void Generate()
     {
         for (int x = currentPlayerChunk.x - chunkCount; x < currentPlayerChunk.x + chunkCount; x++)
@@ -64,23 +68,24 @@ public class World : MonoBehaviour
 
                 foreach (var mapObj in allMapObjects)
                 {
+                    var chancerwsult = Random.Range(0, 100);
+                    if (mapObj.chance >= chancerwsult)
+                    {
+                        GenerateObjects( mapObj.ptrfab, new Vector3(Random.Range(xPos, xPos + Chunk.ChunkWidth), 0, Random.Range(zPos, zPos + Chunk.ChunkWidth)));
 
- GenerateObjects(mapObj.chance, mapObj.ptrfab, new Vector3(Random.Range(xPos, xPos + Chunk.ChunkWidth), 0, Random.Range(zPos, zPos + Chunk.ChunkWidth)));
+                    }
+
 
                 }
             }
         }
     }
 
-    public void GenerateObjects(int chance, GameObject mapobj, Vector3 objpos)
+    public void GenerateObjects(GameObject mapobj, Vector3 objpos)
     {
-
-        int objCount = Random.Range(0, chance);
-
-        for (int i = 0; i < objCount; i++)
-        {
+  
             Instantiate(mapobj, objpos, Quaternion.identity);
-        }
+        
 
     }
 

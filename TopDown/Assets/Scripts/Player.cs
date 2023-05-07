@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro.EditorUtilities;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Player : MonoBehaviour
@@ -16,7 +17,8 @@ public class Player : MonoBehaviour
     public int Hunger = 100;
     public int Water = 100;
 
-
+    public Slider healthBar;
+    public GameObject unitcanvas;
 
 
     //general
@@ -25,6 +27,7 @@ public class Player : MonoBehaviour
     private CharacterController controller;
     private Camera _cam;
     public Transform baseTransform;
+    public Animator animator;   
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +39,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (unitcanvas.transform.rotation != _cam.transform.rotation)
+        {
+            unitcanvas.transform.rotation = _cam.transform.rotation;
+        }
+
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -81,8 +89,10 @@ public class Player : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Vector3 moveDirection = baseTransform.right * horizontal + baseTransform.forward * vertical;
+        Vector3 moveDirection = transform.right * horizontal + transform.forward * vertical;
 
+
+        animator.SetFloat("speed", Vector3.ClampMagnitude(moveDirection, 1).magnitude);
         controller.Move(moveDirection * speed * Time.deltaTime);
 
     }
@@ -91,7 +101,7 @@ public class Player : MonoBehaviour
     {
 
         Health -= damage;
-
+        healthBar.value -= damage;
         if (Health < 0)
         {
             Destroy(gameObject);
