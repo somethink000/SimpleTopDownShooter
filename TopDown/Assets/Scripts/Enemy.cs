@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
     //stats
 
-    public float radius = 2f;
+    public float radius = 1f;
     public int endamage = 5; 
     public int Health = 100;
     private Rigidbody enregid;
@@ -19,12 +20,15 @@ public class Enemy : MonoBehaviour
 
     public Slider healthBar;
     public GameObject unitcanvas;
+    public Animator animator;
+
 
 
 
     private Coroutine _corotin;
     public void Start()
     {
+        animator = GetComponent<Animator>();
         _cam = Camera.main;
             enregid = GetComponent<Rigidbody>();
 
@@ -44,8 +48,11 @@ public class Enemy : MonoBehaviour
         {
             unitcanvas.transform.rotation = _cam.transform.rotation;
         }
+
         DetectCollision();
-        transform.LookAt(ply.transform.position);
+
+        animator.SetFloat("Speed", Vector3.ClampMagnitude(transform.forward, 1).magnitude);
+        transform.LookAt(new Vector3(ply.transform.position.x, 0 , ply.transform.position.z));
 
 
         
@@ -97,6 +104,7 @@ public class Enemy : MonoBehaviour
         if (Health < 0)
         {
             Destroy(gameObject);
+            ply.gameObject.GetComponent<Player>().GetXp(10);
         }
 
     }

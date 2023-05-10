@@ -61,6 +61,11 @@ public class GunController : MonoBehaviour
             magazin -= 1;
 
         }
+
+        if (magazin <= 0)
+        {
+            Reload();
+        }
     }
     public void Reload()
     {
