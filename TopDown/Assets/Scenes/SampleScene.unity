@@ -123,6 +123,67 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &37421750
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1102874357}
+    m_Modifications:
+    - target: {fileID: 3678731853428428395, guid: 9380ddeffed69814eb2eac623e5afecd, type: 3}
+      propertyPath: m_Name
+      value: Ak
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678731853428428396, guid: 9380ddeffed69814eb2eac623e5afecd, type: 3}
+      propertyPath: timebeervineshoot
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678731853737643840, guid: 9380ddeffed69814eb2eac623e5afecd, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678731853737643840, guid: 9380ddeffed69814eb2eac623e5afecd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678731853737643840, guid: 9380ddeffed69814eb2eac623e5afecd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678731853737643840, guid: 9380ddeffed69814eb2eac623e5afecd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678731853737643840, guid: 9380ddeffed69814eb2eac623e5afecd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678731853737643840, guid: 9380ddeffed69814eb2eac623e5afecd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678731853737643840, guid: 9380ddeffed69814eb2eac623e5afecd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678731853737643840, guid: 9380ddeffed69814eb2eac623e5afecd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678731853737643840, guid: 9380ddeffed69814eb2eac623e5afecd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678731853737643840, guid: 9380ddeffed69814eb2eac623e5afecd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678731853737643840, guid: 9380ddeffed69814eb2eac623e5afecd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9380ddeffed69814eb2eac623e5afecd, type: 3}
 --- !u!1 &124827211
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,6 +839,11 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!4 &1102874357 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4446558591353293772, guid: 3df643e6a5c52d74caeae3ea77c61c19, type: 3}
+  m_PrefabInstance: {fileID: 1217112120053943658}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1110679857
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,6 +1082,17 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 4314971357799096048, guid: 3df643e6a5c52d74caeae3ea77c61c19, type: 3}
   m_PrefabInstance: {fileID: 1217112120053943658}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1425755405 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3678731853428428396, guid: 9380ddeffed69814eb2eac623e5afecd, type: 3}
+  m_PrefabInstance: {fileID: 37421750}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5023ea273811c5a49adf5b5ac4a63fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1217112120053943658
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1039,6 +1116,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1425005029}
+    - target: {fileID: 1217112119749210761, guid: 3df643e6a5c52d74caeae3ea77c61c19, type: 3}
+      propertyPath: activeGun
+      value: 
+      objectReference: {fileID: 1425755405}
     - target: {fileID: 1217112119751402438, guid: 3df643e6a5c52d74caeae3ea77c61c19, type: 3}
       propertyPath: timebeervineshoot
       value: 0.1
